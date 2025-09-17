@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Новая папка\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
