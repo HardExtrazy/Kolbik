@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Kolbik.Domain.Entities
         public string? PathPhoto {  get; set; }
         //Коллекция книг (В случае отсутствия будет пустой список)
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        
 
     }
 }
