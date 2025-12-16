@@ -15,8 +15,8 @@
 <!-- меню сайта -->
 <a class="navbar-brand" asp-controller="home" asp-action="Index">Kolbik.UI</a>
 <div class="navbar-nav">
-    <a class="nav-item nav-link active @(controller == "home"?"active":"")" asp-controller="home" asp-action="Index">Лаба 1</a>
+    <a class="nav-item nav-link active @(controller == "home" ? "active" : "")" asp-controller="home" asp-action="Index">Лаба 1</a>
     <a class="nav-item nav-link @(controller == "product" ? "active" : "")" asp-controller="product" asp-action="Index">Каталог</a>
-    <a class="nav-item nav-link @(area == "Admin" ? "active" : "")" asp-area="Admin" asp-page="/Index">Администрирование</a>
+    <a class="nav-item nav-link @(area == "admin" ? "active" : "")" asp-area="Admin" asp-page="/Index">Администрирование</a>
 </div>
 <!-- меню сайта - конец -->

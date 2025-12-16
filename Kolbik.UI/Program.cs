@@ -1,5 +1,7 @@
 
+using Kolbik.UI;
 using Kolbik.UI.Data;
+using Kolbik.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<TempContext>(options =>
+    options.UseSqlServer("ConnectionString"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+//Моя кастомная услуга
+builder.Services.AddScoped<IAuthorService, MemoryAuthorService>();
+builder.Services.AddScoped<IBookService, MemoryBookService>();
 
 var app = builder.Build();
 

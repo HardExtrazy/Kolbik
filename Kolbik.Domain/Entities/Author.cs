@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Kolbik.Domain.Entities
 {
     public class Author
     {
+        [Key]
         //Id Автора
         public uint Id { get; set; }
         //Имя автоа (В случае отсутствия будет пустая строка)
@@ -19,11 +21,7 @@ namespace Kolbik.Domain.Entities
         public string? SureName { get; set; }
         //Возраст
         public byte Age { get; set; }
-        //Путь к фотографии
-        public string? PathPhoto {  get; set; }
-        //Коллекция книг (В случае отсутствия будет пустой список)
-        public ICollection<Book> Books { get; set; } = new List<Book>();
-        
-
+        //Путь к фотографии        
+        public string? Nickname { get; set; }
     }
 }
