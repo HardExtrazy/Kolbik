@@ -23,7 +23,7 @@ namespace Kolbik.UI.Areas.Admin.Pages
         [BindProperty]
         public Book Book { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(uint? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
@@ -70,7 +70,7 @@ namespace Kolbik.UI.Areas.Admin.Pages
             return RedirectToPage("./Index");
         }
 
-        private bool BookExists(uint id)
+        private bool BookExists(int id)
         {
             return _context.Books.Any(e => e.Id == id);
         }

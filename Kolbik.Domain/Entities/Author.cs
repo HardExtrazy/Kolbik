@@ -12,7 +12,7 @@ namespace Kolbik.Domain.Entities
     {
         [Key]
         //Id Автора
-        public uint Id { get; set; }
+        public int Id { get; set; }
         //Имя автоа (В случае отсутствия будет пустая строка)
         public string FirstName { get; set; } = string.Empty;
         //Фамилия автоа (В случае отсутствия будет пустая строка)

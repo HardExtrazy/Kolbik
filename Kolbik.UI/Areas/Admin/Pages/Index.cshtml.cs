@@ -1,6 +1,7 @@
 ﻿using Kolbik.Domain.Entities;
 using Kolbik.UI;
 using Kolbik.UI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Kolbik.UI.Areas.Admin.Pages
 {
+    [Authorize(Policy ="admin")]
     public class IndexModel(IBookService bookService) : PageModel
     {
         //private readonly Kolbik.UI.TempContext _context;

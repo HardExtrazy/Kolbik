@@ -89,16 +89,16 @@ namespace Kolbik.UI.Services
         {
             throw new NotImplementedException();
         }
-        public Task DeleteBookAsync(uint id)
+        public Task DeleteBookAsync(int id)
         {
             throw new NotImplementedException();
         }
-        public Task<ResponseData<Book>> GetBookByIdAsync(uint id)
+        public Task<ResponseData<Book>> GetBookByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateBookAsync(uint id, Book book, IFormFile? formFile)
+        public Task UpdateBookAsync(int id, Book book, IFormFile? formFile)
         {
             throw new NotImplementedException();
         }

@@ -12,7 +12,7 @@ namespace Kolbik.Domain.Entities
     {
         [Key]
         //Id книги
-        public uint Id { get; set; }
+        public int Id { get; set; }
         //Название книги (В случае отсутствия будет пустая строка)
         public string Name { get; set; } = string.Empty;
         //Краткое описание книги (В случае отсутствия будет пустая строка)
@@ -20,7 +20,7 @@ namespace Kolbik.Domain.Entities
         public string? Image {  get; set; }
         //Рейтинг книги
         public short Rating { get; set; }
-        public uint AuthorId { get; set; }
+        public int AuthorId { get; set; }
         public string? AuthorFullName { get; set; }
         //Id Автора (Вторичный ключ)       
         public Author? Author { get; set; }
