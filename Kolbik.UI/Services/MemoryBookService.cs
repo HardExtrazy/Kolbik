@@ -1,5 +1,6 @@
 ﻿using Kolbik.Domain.Entities;
 using Kolbik.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kolbik.UI.Services
 {
@@ -8,8 +9,10 @@ namespace Kolbik.UI.Services
         private readonly IBookService _bookService;
         List<Book> _books;
         List<Author> _authors;
-        public MemoryBookService(IAuthorService authorService)
+        IConfiguration _config;
+        public MemoryBookService(IAuthorService authorService, [FromServices] IConfiguration config)
         {
+            _config = config;
             _authors = authorService.GetAuthorListAsync().Result.Data;
             SetupData();
         }
@@ -104,3 +107,4 @@ namespace Kolbik.UI.Services
         }
     }
 }
+

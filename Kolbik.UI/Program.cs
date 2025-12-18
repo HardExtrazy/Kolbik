@@ -17,6 +17,12 @@ builder.Services.AddDbContext<TempContext>(options =>
     options.UseSqlServer("ConnectionString"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddHttpClient<IBookService, ApiBookService>(opt
+=> opt.BaseAddress = new Uri("https://localhost:7002/api/books/"));
+builder.Services.AddHttpClient<IAuthorService, ApiAuthorService>(opt
+=> opt.BaseAddress = new
+Uri("https://localhost:7002/api/author/"));
+
 builder.Services.AddDefaultIdentity<AppUser>(options =>
 { options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireDigit = false;
