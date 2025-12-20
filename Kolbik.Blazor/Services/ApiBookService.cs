@@ -25,11 +25,11 @@ namespace Kolbik.Blazor.Services
                 .ReadFromJsonAsync<ResponseData<List<Book>>>();
                 // обновить параметры страниц
                 _currentPage = pageNo;
-                _totalPages = (int)Math.Ceiling(responseData.Data.Count() / (double)3);
+                _totalPages = (int)Math.Ceiling(responseData.Data.Count() / (double)6);
                 // получить нужную страницу
                 _books = responseData.Data
-                .Skip((pageNo - 1) * 3)
-                .Take(3)
+                .Skip((pageNo - 1) * 6)
+                .Take(6)
                 .ToList();
                 ListChanged?.Invoke();
             }

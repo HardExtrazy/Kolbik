@@ -1,0 +1,72 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+
+
+<h3>BooksList</h3>
+@* @if (BookService.Books.Count() == 0)
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    foreach (var book in BookService.Books)
+    {
+        <div>
+            @book.Name
+            <p>@book.Author</p>
+        </div>
+    }
+} *@
+<div class="btn-group" role="group" aria-label="Pager">
+    <!-- Кнопка Previous -->
+    <button type="button" class="btn btn-outline-primary
+@(previousEnabled ? "" : "disabled")"
+            @onclick="@(e => OnPageSelected(BookService.CurrentPage - 1))">
+        <span aria-hidden="true">&laquo;</span>
+    </button>
+    @for (int i = 1; i <= BookService.TotalPages; i++)
+    {
+        var temp = i;
+        <button type="button" class="btn btn-outline-primary
+    @(IsActive(temp) ? "active" : "")"
+                @onclick="@(e => OnPageSelected(temp))">
+            @temp
+        </button>
+    }
+    <!-- Кнопка Next -->
+    <button type="button" class="btn btn-outline-primary
+@(nextEnabled ? "" : "disabled")"
+            @onclick="@(e => OnPageSelected(BookService.CurrentPage + 1))">
+        <span aria-hidden="true">&raquo;</span>
+    </button>
+</div>
+@code
+{
+    [CascadingParameter]
+    public IBookService<Book> BookService { get; set; }
+    protected override void OnInitialized()
+    {
+        BookService.ListChanged += StateHasChanged;
+    }
+    // Кнопка Previous доступна?
+    bool previousEnabled { get => BookService.CurrentPage != 1; }
+    // Кнопка Next доступна
+    bool nextEnabled
+    {
+        get => BookService.CurrentPage !=
+    BookService.TotalPages;
+    }
+    // Это текущая страница?
+    bool IsActive(int pageNo) => pageNo == BookService.CurrentPage;
+    // Обработчик клика кнопки
+    async void OnPageSelected(int pageNo)
+    {
+        await BookService.GetBooks(pageNo);
+    }
+    public void Dispose()
+    {
+        BookService.ListChanged -= StateHasChanged;
+    }
+}
+
+

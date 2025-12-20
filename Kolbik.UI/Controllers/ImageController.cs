@@ -17,8 +17,8 @@ namespace Kolbik.UI.Controllers
             }
             if (user.Avatar != null)
                 return File(user.Avatar, user.MimeType);
-            var imagePath = Path.Combine("Images", "default-profile-picture.png");
-            return File(imagePath, "image/png");
+            var imagePath = Path.Combine("Images", "anonava.jpg");
+            return File(imagePath, "image/jpg");
         }
     }
 }
