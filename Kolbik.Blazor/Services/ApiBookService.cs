@@ -16,7 +16,7 @@ namespace Kolbik.Blazor.Services
         public async Task GetBooks(int pageNo = 1)
         {
             // Отправить запрос http
-            var result = await Http.GetAsync(Http.BaseAddress.AbsoluteUri);
+            var result = await Http.GetAsync(Http.BaseAddress);
             // В случае успешного ответа
             if (result.IsSuccessStatusCode)
             {

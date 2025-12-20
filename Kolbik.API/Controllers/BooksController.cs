@@ -27,7 +27,7 @@ namespace Kolbik.API.Controllers
 
         // GET: api/Books/5
         [HttpGet]
-        public async Task<ActionResult<ResponseData<List<Book>>>> GetDishes(string? author)
+        public async Task<ActionResult<ResponseData<List<Book>>>> GetBooks(string? author)
         {
             // Создать объект результата
             var result = new ResponseData<IEnumerable<Book>>();
@@ -40,9 +40,23 @@ namespace Kolbik.API.Controllers
             // Если список пустой
             if (data.Count() == 0)
             {
-                return ResponseData<List<Book>>.Error("Нет объектов в выбраннной категории");
-}
-            return ResponseData<List<Book>>.OK(data);
+                return Ok(ResponseData<List<Book>>.Error("Нет объектов в выбраннной категории"));
+            }
+            return Ok(ResponseData<List<Book>>.OK(data));
+        }
+
+        // GET: api/Books/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBook(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return book;
         }
 
         // PUT: api/Books/5
@@ -76,39 +90,46 @@ namespace Kolbik.API.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Book>> PostBook(Book book)
+        {
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBook", new { id = book.Id }, book);
+        }
         // POST: api/Books
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> SaveImage(int id, IFormFile image)
         {
-            // Найти объект по Id
-            var dish = await _context.Books.FindAsync(id);
-            if (dish == null)
+            // Найти объект по Id 
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
             {
                 return NotFound();
             }
-            // Путь к папке wwwroot/Images
+
+            // Путь к папке wwwroot/Images 
             var imagesPath = Path.Combine(_env.WebRootPath, "Images");
-            // получить случайное имя файла
+            // получить случайное имя файла 
             var randomName = Path.GetRandomFileName();
-            // получить расширение в исходном файле
+            // получить расширение в исходном файле 
             var extension = Path.GetExtension(image.FileName);
-            // задать в новом имени расширение как в исходном файле
+            // задать в новом имени расширение как в исходном файле 
             var fileName = Path.ChangeExtension(randomName, extension);
-            // полный путь к файлу
+            // полный путь к файлу 
             var filePath = Path.Combine(imagesPath, fileName);
-            // создать файл и открыть поток для чтения
+            // создать файл и открыть поток для записи 
             using var stream = System.IO.File.OpenWrite(filePath);
-            // скопировать файл в поток
+            // скопировать файл в поток 
             await image.CopyToAsync(stream);
-            // получить Url хоста API
+            // получить Url хоста 
             var host = "https://" + Request.Host;
-            // Url файла изображения
+            // Url файла изображения 
             var url = $"{host}/Images/{fileName}";
-            // Сохранить url файла в объекте
-            dish.Image = url;
+            // Сохранить url файла в объекте 
+            book.Image = url;
             await _context.SaveChangesAsync();
             return Ok();
         }
