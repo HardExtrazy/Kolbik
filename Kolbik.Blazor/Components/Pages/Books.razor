@@ -1,0 +1,30 @@
+﻿@page "/books"
+@using Kolbik.Blazor.Services
+@using Kolbik.Domain.Entities
+@rendermode InteractiveServer
+@* @attribute [StreamRendering] *@
+
+<h3>Collection</h3>
+
+@* @if(BookService.Books.Count() == 0)
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    foreach(var book in BookService.Books)
+    {
+        <div>
+            @book.Name
+            <p>@book.Author</p>
+        </div>
+    }
+} *@
+
+@code {
+    [Inject] IBookService<Book> BookService { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await BookService.GetBooks(1);
+    }
+}
