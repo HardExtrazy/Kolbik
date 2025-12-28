@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kolbik.API", "Kolbik.API\Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kolbik.Blazor", "Kolbik.Blazor\Kolbik.Blazor.csproj", "{C46BD81B-73F9-4E32-A782-53C64E80DFBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kolbik.Blazor2", "Kolbik.Blazor2\Kolbik.Blazor2.csproj", "{286860D8-3062-4DA1-BB55-02B68B51CE94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C46BD81B-73F9-4E32-A782-53C64E80DFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C46BD81B-73F9-4E32-A782-53C64E80DFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C46BD81B-73F9-4E32-A782-53C64E80DFBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{286860D8-3062-4DA1-BB55-02B68B51CE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{286860D8-3062-4DA1-BB55-02B68B51CE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{286860D8-3062-4DA1-BB55-02B68B51CE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{286860D8-3062-4DA1-BB55-02B68B51CE94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

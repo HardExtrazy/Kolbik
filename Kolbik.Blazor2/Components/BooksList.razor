@@ -1,0 +1,43 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+
+<h3>BooksList</h3>
+
+@if (ProductService.Products.Count() != 0)
+{
+    foreach (var book in ProductService.Products)
+    {
+        <tr>
+            <td>@book.Name</td>
+            <td>
+                <button class="btn btn-outline-dark"
+                        @onclick="@(() => OnBookSelected(book.Id))">
+                    Подробно
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+
+@code {
+    [CascadingParameter]
+    IProductService<Book> ProductService { get; set; }
+    [Parameter]
+    public EventCallback<int> BookSelected { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ProductService.ListChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProductService.ListChanged -= StateHasChanged;
+    }
+
+    public async void OnBookSelected(int id)
+    {
+        await BookSelected.InvokeAsync(id);
+    }
+}
